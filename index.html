@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>HHPoker俱乐部 · 精英德扑圈官方入口</title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #0b0e1a;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-light {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(225, 29, 72, 0.3);
+            box-shadow: 0 20px 48px -12px rgba(225, 29, 72, 0.15);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #f43f5e, #e11d48, #be123c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .gradient-bg-dark {
+            background: radial-gradient(ellipse at 20% 30%, #1e1b4b, #0b0e1a 70%);
+        }
+        .glow-rose {
+            box-shadow: 0 0 40px -8px rgba(225, 29, 72, 0.25);
+        }
+        .btn-rose {
+            background: linear-gradient(135deg, #e11d48, #be123c);
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 28px -8px rgba(225, 29, 72, 0.35);
+        }
+        .btn-rose:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px -8px rgba(225, 29, 72, 0.5);
+        }
+        .btn-outline-rose {
+            border: 1.5px solid rgba(225, 29, 72, 0.5);
+            color: #f43f5e;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+        .btn-outline-rose:hover {
+            background: rgba(225, 29, 72, 0.1);
+            border-color: #e11d48;
+            transform: translateY(-2px);
+        }
+        .nav-link {
+            position: relative;
+            color: rgba(255, 255, 255, 0.75);
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 0;
+            height: 2px;
+            background: #e11d48;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #fff;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .faq-item summary {
+            list-style: none;
+            cursor: pointer;
+            user-select: none;
+        }
+        .faq-item summary::-webkit-details-marker {
+            display: none;
+        }
+        .faq-item[open] .faq-icon {
+            transform: rotate(45deg);
+            color: #e11d48;
+        }
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        .animate-slide-up {
+            animation: slideUp 0.7s ease forwards;
+        }
+        .animate-scale-in {
+            animation: scaleIn 0.5s ease forwards;
+        }
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        @keyframes slideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes scaleIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.92);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .stat-item {
+            transition: all 0.3s ease;
+        }
+        .stat-item:hover {
+            transform: scale(1.04);
+        }
+        .mobile-nav {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hero-bg-glow {
+            background: radial-gradient(ellipse at 30% 40%, rgba(225, 29, 72, 0.08), transparent 70%);
+        }
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 48px -16px rgba(225, 29, 72, 0.12);
+        }
+        .step-line {
+            position: relative;
+        }
+        .step-line::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 48px;
+            bottom: -24px;
+            width: 2px;
+            background: linear-gradient(to bottom, #e11d48, transparent);
+            opacity: 0.3;
+        }
+        .step-line:last-child::before {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .step-line::before {
+                left: 16px;
+            }
+        }
+        .ping-animation {
+            animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+        @keyframes ping {
+            0% {
+                box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.5);
+            }
+            70% {
+                box-shadow: 0 0 0 16px rgba(225, 29, 72, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(225, 29, 72, 0);
+            }
+        }
+        .wechat-pulse {
+            animation: pulse-glow 2.5s ease-in-out infinite;
+        }
+        @keyframes pulse-glow {
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 28px 6px rgba(225, 29, 72, 0.15);
+            }
+        }
+        /* 自定义滚动条 */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0e1a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e11d48;
+            border-radius: 8px;
+        }
+    </style>
+
+    <meta name="description" content="HHPoker俱乐部 · 精英德扑圈官方入口">
+    <meta name="keywords" content="HHPoker俱乐部, 精英德扑圈官方入口">
+</head>
+<body class="text-white antialiased">
+
+    <!-- ===================== NAVBAR ===================== -->
+    <nav class="fixed top-0 left-0 w-full z-50 glass border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-2.5 group">
+                    <span class="text-2xl font-extrabold tracking-tight">
+                        <span class="text-rose-500">HHPoker</span>
+                        <span class="text-white/80">俱乐部</span>
+                    </span>
+                </a>
+
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#hero" class="nav-link text-sm font-medium">首页</a>
+                    <a href="#features" class="nav-link text-sm font-medium">核心功能</a>
+                    <a href="#download" class="nav-link text-sm font-medium">下载中心</a>
+                    <a href="#join" class="nav-link text-sm font-medium">加入俱乐部</a>
+                    <a href="#service" class="nav-link text-sm font-medium">客服</a>
+                    <a href="#faq" class="nav-link text-sm font-medium">FAQ</a>
+                    <a href="#cta-final" class="btn-rose text-white text-sm font-semibold px-5 py-2.5 rounded-xl glow-rose">
+                        <i class="fas fa-download mr-1.5"></i>获取安装包
+                    </a>
+                </div>
+
+                <!-- Mobile Hamburger -->
+                <button id="menuBtn" class="md:hidden flex items-center justify-center w-10 h-10 rounded-xl text-white/70 hover:text-white hover:bg-white/5 transition" aria-label="菜单">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="mobile-nav max-h-0 overflow-hidden md:hidden bg-slate-900/95 backdrop-blur-xl border-t border-white/5">
+            <div class="px-4 py-5 space-y-4">
+                <a href="#hero" class="block text-white/80 hover:text-rose-400 py-2 text-sm font-medium"><i class="fas fa-home w-5 text-rose-400/70"></i> 首页</a>
+                <a href="#features" class="block text-white/80 hover:text-rose-400 py-2 text-sm font-medium"><i class="fas fa-cubes w-5 text-rose-400/70"></i> 核心功能</a>
+                <a href="#download" class="block text-white/80 hover:text-rose-400 py-2 text-sm font-medium"><i class="fas fa-download w-5 text-rose-400/70"></i> 下载中心</a>
+                <a href="#join" class="block text-white/80 hover:text-rose-400 py-2 text-sm font-medium"><i class="fas fa-user-plus w-5 text-rose-400/70"></i> 加入俱乐部</a>
+                <a href="#service" class="block text-white/80 hover:text-rose-400 py-2 text-sm font-medium"><i class="fas fa-headset w-5 text-rose-400/70"></i> 客服微信 329629</a>
+                <a href="#faq" class="block text-white/80 hover:text-rose-400 py-2 text-sm font-medium"><i class="fas fa-question-circle w-5 text-rose-400/70"></i> FAQ</a>
+                <a href="#cta-final" class="btn-rose text-white text-center font-semibold px-5 py-3 rounded-xl block">获取安装包</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===================== HERO ===================== -->
+    <section id="hero" class="relative min-h-screen flex items-center pt-24 pb-16 md:pt-28 md:pb-20 overflow-hidden">
+        <!-- 背景光效 -->
+        <div class="absolute inset-0 hero-bg-glow pointer-events-none"></div>
+        <div class="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-rose-600/5 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-purple-600/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+            <div class="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
+                <!-- Left: Image -->
+                <div class="order-2 md:order-1 animate-scale-in">
+                    <div class="glass-card rounded-2xl overflow-hidden shadow-2xl glow-rose">
+                        <img src="https://picsum.photos/seed/HHPoker%E4%BF%B1%E4%B9%90%E9%83%A8%E5%AE%A2%E6%9C%8D-rose/800/450"
+                        alt="HHPoker俱乐部 德扑圈界面"
+                        class="w-full h-auto object-cover rounded-2xl" loading="lazy" />
+                    </div>
+                    <!-- 浮标装饰 -->
+                    <div class="hidden lg:flex items-center gap-3 mt-5 ml-2">
+                        <span class="inline-flex items-center gap-1.5 text-xs text-white/40 bg-white/5 px-3 py-1.5 rounded-full">
+                            <i class="fas fa-shield-alt text-rose-400/60 text-[10px]"></i> 安全加密
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 text-xs text-white/40 bg-white/5 px-3 py-1.5 rounded-full">
+                            <i class="fas fa-bolt text-rose-400/60 text-[10px]"></i> 极速匹配
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 text-xs text-white/40 bg-white/5 px-3 py-1.5 rounded-full">
+                            <i class="fas fa-users text-rose-400/60 text-[10px]"></i> 10W+ 牌友
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Right: Content -->
+                <div class="order-1 md:order-2 animate-slide-up">
+                    <div class="inline-flex items-center gap-2 bg-rose-600/10 border border-rose-600/20 px-4 py-1.5 rounded-full text-rose-300 text-xs font-medium tracking-wide mb-6">
+                        <i class="fas fa-crown text-rose-400 text-sm"></i> 精英俱乐部 · 官方入口
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
+                        德扑圈 <span class="gradient-text">HHPoker</span><br />
+                        <span class="text-white/90">俱乐部 · 极速竞技</span>
+                    </h1>
+                    <p class="mt-5 text-lg sm:text-xl text-white/50 leading-relaxed max-w-lg">
+                        高端德扑圈俱乐部，万人在线·公平竞技。下载 HHPoker 客户端，联系客服微信 <strong class="text-rose-300 font-bold">329629</strong> 获取专属邀请码，即刻加入精英牌局。
+                    </p>
+                    <div class="mt-8 flex flex-wrap gap-4 items-center">
+                        <a href="#download" class="btn-rose text-white font-semibold px-8 py-3.5 rounded-xl text-base flex items-center gap-2.5 glow-rose">
+                            <i class="fas fa-download"></i> 获取安装包
+                        </a>
+                        <a href="#service" class="btn-outline-rose font-medium px-7 py-3.5 rounded-xl text-base flex items-center gap-2.5">
+                            <i class="fab fa-weixin"></i> 联系客服 329629
+                        </a>
+                    </div>
+                    <div class="mt-6 flex items-center gap-5 text-sm text-white/30">
+                        <span><i class="fas fa-check-circle text-rose-400/60 mr-1.5"></i> 官方正版</span>
+                        <span><i class="fas fa-check-circle text-rose-400/60 mr-1.5"></i> 安全无广告</span>
+                        <span><i class="fas fa-check-circle text-rose-400/60 mr-1.5"></i> 7x24h 客服</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================核心功能 (Features) ===================== -->
+    <section id="features" class="py-20 md:py-28 bg-slate-900/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block text-rose-400 text-sm font-semibold tracking-widest uppercase bg-rose-600/10 px-4 py-1.5 rounded-full border border-rose-600/20">核心优势</span>
+                <h2 class="text-3xl sm:text-4xl font-bold mt-5">为什么选择 <span class="gradient-text">HHPoker</span></h2>
+                <p class="mt-4 text-white/40 max-w-2xl mx-auto text-lg">极速体验、专业赛事、专属客服，打造亚洲顶级德扑圈俱乐部</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+                <!-- 1 -->
+                <div class="glass-card rounded-xl p-6 lg:p-7 text-center group">
+                    <div class="w-14 h-14 mx-auto rounded-2xl bg-rose-600/10 flex items-center justify-center text-rose-400 text-2xl group-hover:scale-110 transition">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mt-5">安全加密</h3>
+                    <p class="text-white/40 text-sm mt-2 leading-relaxed">银行级数据加密，严格隐私保护，公平算法杜绝作弊，每一局都纯净透明。</p>
+                </div>
+                <!-- 2 -->
+                <div class="glass-card rounded-xl p-6 lg:p-7 text-center group">
+                    <div class="w-14 h-14 mx-auto rounded-2xl bg-rose-600/10 flex items-center justify-center text-rose-400 text-2xl group-hover:scale-110 transition">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mt-5">极速匹配</h3>
+                    <p class="text-white/40 text-sm mt-2 leading-relaxed">智能匹配引擎，毫秒级入座。支持 6人/9人 桌，24小时不间断牌局。</p>
+                </div>
+                <!-- 3 -->
+                <div class="glass-card rounded-xl p-6 lg:p-7 text-center group">
+                    <div class="w-14 h-14 mx-auto rounded-2xl bg-rose-600/10 flex items-center justify-center text-rose-400 text-2xl group-hover:scale-110 transition">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mt-5">专业赛事</h3>
+                    <p class="text-white/40 text-sm mt-2 leading-relaxed">每日MTT、SNG、高额桌，丰厚奖池，与亚洲顶尖牌手同台竞技。</p>
+                </div>
+                <!-- 4 -->
+                <div class="glass-card rounded-xl p-6 lg:p-7 text-center group">
+                    <div class="w-14 h-14 mx-auto rounded-2xl bg-rose-600/10 flex items-center justify-center text-rose-400 text-2xl group-hover:scale-110 transition">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mt-5">专属客服</h3>
+                    <p class="text-white/40 text-sm mt-2 leading-relaxed">7×24h 微信客服 <strong class="text-rose-300">329629</strong>，秒级响应，解决一切问题。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== 官网入口 + 下载中心 ===================== -->
+    <section id="download" class="py-20 md:py-28 relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-purple-900/10 to-slate-900/60 pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <div>
+                    <span class="text-rose-400 text-sm font-semibold tracking-widest uppercase bg-rose-600/10 px-4 py-1.5 rounded-full border border-rose-600/20 inline-block">官方入口</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold mt-5">官方下载中心</h2>
+                    <p class="mt-4 text-white/50 text-lg leading-relaxed">唯一正版 HHPoker 客户端，安全无毒、极速安装。联系客服微信 <strong class="text-rose-300 font-bold">329629</strong> 获取最新下载链接与邀请码。</p>
+                    <div class="mt-8 flex flex-wrap gap-4">
+                        <a href="#" class="btn-rose text-white font-semibold px-6 py-3 rounded-xl flex items-center gap-2.5 glow-rose">
+                            <i class="fab fa-apple"></i> iOS 下载
+                        </a>
+                        <a href="#" class="btn-rose text-white font-semibold px-6 py-3 rounded-xl flex items-center gap-2.5 glow-rose">
+                            <i class="fab fa-android"></i> Android 下载
+                        </a>
+                        <a href="#" class="btn-outline-rose font-medium px-6 py-3 rounded-xl flex items-center gap-2.5">
+                            <i class="fas fa-desktop"></i> PC 版本
+                        </a>
+                    </div>
+                    <div class="mt-6 text-sm text-white/30 flex items-center gap-3">
+                        <i class="fas fa-qrcode text-rose-400/60"></i>
+                        <span>扫码下载 · 联系客服微信 329629 获取安装包</span>
+                    </div>
+                </div>
+                <div class="glass-card rounded-2xl p-6 lg:p-8 text-center">
+                    <div class="inline-flex items-center justify-center w-28 h-28 sm:w-36 sm:h-36 bg-white/5 rounded-2xl border border-white/5 mx-auto">
+                        <i class="fas fa-qrcode text-5xl sm:text-6xl text-rose-300/70"></i>
+                    </div>
+                    <p class="mt-5 text-white/60 text-sm">扫码添加客服微信 <strong class="text-rose-300 font-bold">329629</strong></p>
+                    <p class="text-white/40 text-xs mt-1">获取专属下载通道 · 秒发安装包</p>
+                    <div class="mt-5 flex justify-center">
+                        <span class="inline-flex items-center gap-2 bg-rose-600/10 text-rose-300 text-sm px-5 py-2 rounded-full border border-rose-600/20">
+                            <i class="fab fa-weixin"></i> 微信 329629
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== 加入俱乐部流程 ===================== -->
+    <section id="join" class="py-20 md:py-28 bg-slate-900/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block text-rose-400 text-sm font-semibold tracking-widest uppercase bg-rose-600/10 px-4 py-1.5 rounded-full border border-rose-600/20">入会指引</span>
+                <h2 class="text-3xl sm:text-4xl font-bold mt-5">三步加入 <span class="gradient-text">HHPoker 俱乐部</span></h2>
+                <p class="mt-4 text-white/40 max-w-xl mx-auto">简单三步，开启精英德扑之旅</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8 lg:gap-12 max-w-5xl mx-auto">
+                <!-- Step 1 -->
+                <div class="step-line text-center relative">
+                    <div class="w-14 h-14 mx-auto rounded-2xl bg-rose-600/15 flex items-center justify-center text-rose-400 text-2xl border border-rose-600/20">
+                        <i class="fab fa-weixin"></i>
+                    </div>
+                    <span class="block mt-2 text-rose-400/60 text-xs font-bold">STEP 01</span>
+                    <h3 class="text-lg font-semibold mt-2">联系客服</h3>
+                    <p class="text-white/40 text-sm mt-2 leading-relaxed">添加微信 <strong class="text-rose-300">329629</strong>，获取入会邀请码</p>
+                </div>
+                <!-- Step 2 -->
+                <div class="step-line text-center relative">
+                    <div class="w-14 h-14 mx-auto rounded-2xl bg-rose-600/15 flex items-center justify-center text-rose-400 text-2xl border border-rose-600/20">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <span class="block mt-2 text-rose-400/60 text-xs font-bold">STEP 02</span>
+                    <h3 class="text-lg font-semibold mt-2">下载客户端</h3>
+                    <p class="text-white/40 text-sm mt-2 leading-relaxed">通过客服提供的官方链接下载 HHPoker</p>
+                </div>
+                <!-- Step 3 -->
+                <div class="step-line text-center relative">
+                    <div class="w-14 h-14 mx-auto rounded-2xl bg-rose-600/15 flex items-center justify-center text-rose-400 text-2xl border border-rose-600/20">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <span class="block mt-2 text-rose-400/60 text-xs font-bold">STEP 03</span>
+                    <h3 class="text-lg font-semibold mt-2">加入牌局</h3>
+                    <p class="text-white/40 text-sm mt-2 leading-relaxed">输入邀请码，即刻进入精英牌局大厅</p>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="#service" class="btn-rose text-white font-semibold px-8 py-3.5 rounded-xl inline-flex items-center gap-2.5 glow-rose">
+                    <i class="fab fa-weixin"></i> 添加客服微信 329629
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== 俱乐部客服 ===================== -->
+    <section id="service" class="py-20 md:py-28 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-900 via-purple-900/20 to-slate-900 pointer-events-none"></div>
+        <div class="absolute top-10 left-10 w-72 h-72 bg-rose-600/5 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-10 right-10 w-72 h-72 bg-purple-600/5 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="glass-card rounded-2xl p-8 md:p-12 lg:p-16 max-w-4xl mx-auto text-center wechat-pulse">
+                <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-rose-600/15 border border-rose-600/20 text-rose-400 text-4xl mb-6">
+                    <i class="fab fa-weixin"></i>
+                </div>
+                <span class="text-rose-400 text-sm font-semibold tracking-widest uppercase bg-rose-600/10 px-4 py-1.5 rounded-full border border-rose-600/20 inline-block">俱乐部客服</span>
+                <h2 class="text-3xl sm:text-4xl font-bold mt-5">专属客服 · 即刻响应</h2>
+                <p class="mt-4 text-white/50 text-lg max-w-lg mx-auto">添加客服微信，获取安装包、邀请码、俱乐部入会指引，7×24h 在线。</p>
+                <div class="mt-8 inline-flex items-center gap-3 bg-white/5 border border-white/10 rounded-2xl px-8 py-5">
+                    <i class="fab fa-weixin text-3xl text-rose-400"></i>
+                    <span class="text-left">
+                        <span class="block text-sm text-white/40">客服微信号</span>
+                        <span class="block text-3xl md:text-4xl font-extrabold tracking-wide text-rose-300">329629</span>
+                    </span>
+                </div>
+                <div class="mt-8 flex flex-wrap justify-center gap-4">
+                    <a href="weixin://dl/chat?329629" class="btn-rose text-white font-semibold px-8 py-3.5 rounded-xl glow-rose inline-flex items-center gap-2.5">
+                        <i class="fab fa-weixin"></i> 立即联系客服
+                    </a>
+                    <a href="#download" class="btn-outline-rose font-medium px-7 py-3.5 rounded-xl inline-flex items-center gap-2.5">
+                        <i class="fas fa-download"></i> 获取安装包
+                    </a>
+                </div>
+                <p class="mt-5 text-white/30 text-sm"><i class="fas fa-clock text-rose-400/60 mr-1.5"></i> 平均响应 &lt; 30 秒 · 全年无休</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== 牌局大厅 ===================== -->
+    <section id="hall" class="py-20 md:py-28 bg-slate-900/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block text-rose-400 text-sm font-semibold tracking-widest uppercase bg-rose-600/10 px-4 py-1.5 rounded-full border border-rose-600/20">牌局大厅</span>
+                <h2 class="text-3xl sm:text-4xl font-bold mt-5">多元化 <span class="gradient-text">竞技场</span></h2>
+                <p class="mt-4 text-white/40 max-w-2xl mx-auto">满足不同级别、不同风格牌友的竞技需求</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
+                <div class="glass-card rounded-xl p-5 lg:p-6 text-center hover:border-rose-600/20 transition">
+                    <div class="w-12 h-12 mx-auto rounded-xl bg-rose-600/10 flex items-center justify-center text-rose-400 text-xl">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4 class="text-base font-semibold mt-3">6人桌</h4>
+                    <p class="text-white/40 text-xs mt-1">快速对抗</p>
+                </div>
+                <div class="glass-card rounded-xl p-5 lg:p-6 text-center hover:border-rose-600/20 transition">
+                    <div class="w-12 h-12 mx-auto rounded-xl bg-rose-600/10 flex items-center justify-center text-rose-400 text-xl">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <h4 class="text-base font-semibold mt-3">9人桌</h4>
+                    <p class="text-white/40 text-xs mt-1">标准赛事</p>
+                </div>
+                <div class="glass-card rounded-xl p-5 lg:p-6 text-center hover:border-rose-600/20 transition">
+                    <div class="w-12 h-12 mx-auto rounded-xl bg-rose-600/10 flex items-center justify-center text-rose-400 text-xl">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h4 class="text-base font-semibold mt-3">MTT 锦标赛</h4>
+                    <p class="text-white/40 text-xs mt-1">百万奖池</p>
+                </div>
+                <div class="glass-card rounded-xl p-5 lg:p-6 text-center hover:border-rose-600/20 transition">
+                    <div class="w-12 h-12 mx-auto rounded-xl bg-rose-600/10 flex items-center justify-center text-rose-400 text-xl">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h4 class="text-base font-semibold mt-3">高额桌</h4>
+                    <p class="text-white/40 text-xs mt-1">精英对决</p>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="#service" class="btn-outline-rose font-medium px-8 py-3 rounded-xl inline-flex items-center gap-2.5">
+                    <i class="fab fa-weixin"></i> 联系客服 329629 获取牌局密码
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== 产品优势 ===================== -->
+    <section id="advantages" class="py-20 md:py-28 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block text-rose-400 text-sm font-semibold tracking-widest uppercase bg-rose-600/10 px-4 py-1.5 rounded-full border border-rose-600/20">产品优势</span>
+                <h2 class="text-3xl sm:text-4xl font-bold mt-5">为什么牌友都选 <span class="gradient-text">HHPoker</span></h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="glass-card rounded-xl p-6 lg:p-7">
+                    <div class="text-rose-400 text-2xl mb-4"><i class="fas fa-server"></i></div>
+                    <h3 class="text-lg font-semibold">全球加速</h3>
+                    <p class="text-white/40 text-sm mt-2">BGP 多线服务器，低延迟不卡顿，跨国牌局同样流畅。</p>
+                </div>
+                <div class="glass-card rounded-xl p-6 lg:p-7">
+                    <div class="text-rose-400 text-2xl mb-4"><i class="fas fa-chart-line"></i></div>
+                    <h3 class="text-lg font-semibold">数据实时</h3>
+                    <p class="text-white/40 text-sm mt-2">牌局数据云端同步，战绩统计一目了然，随时复盘。</p>
+                </div>
+                <div class="glass-card rounded-xl p-6 lg:p-7">
+                    <div class="text-rose-400 text-2xl mb-4"><i class="fas fa-user-lock"></i></div>
+                    <h3 class="text-lg font-semibold">隐私保护</h3>
+                    <p class="text-white/40 text-sm mt-2">匿名 ID 出战，隐藏真实信息，专注牌技博弈。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== Stats ===================== -->
+    <section class="py-16 md:py-20 bg-slate-900/60 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="stat-item">
+                    <span class="text-4xl md:text-5xl font-extrabold gradient-text">128<span class="text-2xl">W+</span></span>
+                    <p class="text-white/40 text-sm mt-1">注册牌友</p>
+                </div>
+                <div class="stat-item">
+                    <span class="text-4xl md:text-5xl font-extrabold gradient-text">3,680<span class="text-2xl">+</span></span>
+                    <p class="text-white/40 text-sm mt-1">每日牌局</p>
+                </div>
+                <div class="stat-item">
+                    <span class="text-4xl md:text-5xl font-extrabold gradient-text">96<span class="text-2xl">%</span></span>
+                    <p class="text-white/40 text-sm mt-1">满意率</p>
+                </div>
+                <div class="stat-item">
+                    <span class="text-4xl md:text-5xl font-extrabold gradient-text">24<span class="text-2xl">h</span></span>
+                    <p class="text-white/40 text-sm mt-1">客服在线</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== 用户评价 ===================== -->
+    <section id="testimonials" class="py-20 md:py-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block text-rose-400 text-sm font-semibold tracking-widest uppercase bg-rose-600/10 px-4 py-1.5 rounded-full border border-rose-600/20">牌友心声</span>
+                <h2 class="text-3xl sm:text-4xl font-bold mt-5">来自俱乐部会员的评价</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto">
+                <div class="testimonial-card glass-card rounded-xl p-6 lg:p-7">
+                    <div class="flex items-center gap-1 text-rose-400 text-sm mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-white/60 text-sm leading-relaxed">"客服响应超级快，微信加了秒通过，安装包直接发过来，进去打了几局，牌友素质很高，体验非常好。"</p>
+                    <div class="mt-4 flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-rose-600/15 flex items-center justify-center text-rose-400 text-sm font-bold">张</div>
+                        <div>
+                            <span class="block text-sm font-medium">张先生</span>
+                            <span class="block text-xs text-white/30">俱乐部黄金会员</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card glass-card rounded-xl p-6 lg:p-7">
+                    <div class="flex items-center gap-1 text-rose-400 text-sm mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-white/60 text-sm leading-relaxed">"之前用过其他平台，HHPoker 流畅度和公平性明显更好。客服 329629 非常专业，俱乐部氛围很好，推荐！"</p>
+                    <div class="mt-4 flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-rose-600/15 flex items-center justify-center text-rose-400 text-sm font-bold">李</div>
+                        <div>
+                            <span class="block text-sm font-medium">李先生</span>
+                            <span class="block text-xs text-white/30">俱乐部钻石会员</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card glass-card rounded-xl p-6 lg:p-7">
+                    <div class="flex items-center gap-1 text-rose-400 text-sm mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-white/60 text-sm leading-relaxed">"MTT 锦标赛奖池真实，拿过一次亚军，客服当天就安排发奖了。身边朋友都转来 HHPoker 了，靠谱。"</p>
+                    <div class="mt-4 flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-rose-600/15 flex items-center justify-center text-rose-400 text-sm font-bold">王</div>
+                        <div>
+                            <span class="block text-sm font-medium">王先生</span>
+                            <span class="block text-xs text-white/30">俱乐部铂金会员</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== FAQ ===================== -->
+    <section id="faq" class="py-20 md:py-28 bg-slate-900/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block text-rose-400 text-sm font-semibold tracking-widest uppercase bg-rose-600/10 px-4 py-1.5 rounded-full border border-rose-600/20">常见问题</span>
+                <h2 class="text-3xl sm:text-4xl font-bold mt-5">FAQ</h2>
+                <p class="mt-4 text-white/40 max-w-xl mx-auto">关于下载、加入俱乐部、客服的任何疑问，这里都有答案</p>
+            </div>
+            <div class="max-w-3xl mx-auto space-y-4">
+                <details class="faq-item glass-card rounded-xl overflow-hidden">
+                    <summary class="flex items-center justify-between px-6 py-5 text-base font-medium">
+                        <span>如何下载 HHPoker 客户端？</span>
+                        <span class="faq-icon text-white/30 text-xl transition"><i class="fas fa-plus-circle"></i></span>
+                    </summary>
+                    <div class="px-6 pb-5 text-white/40 text-sm leading-relaxed">
+                        添加客服微信 <strong class="text-rose-300">329629</strong>，客服会发送官方最新版本下载链接（iOS/Android/PC 三端）。请勿从非官方渠道下载，谨防钓鱼软件。
+                    </div>
+                </details>
+                <details class="faq-item glass-card rounded-xl overflow-hidden">
+                    <summary class="flex items-center justify-between px-6 py-5 text-base font-medium">
+                        <span>加入俱乐部需要邀请码吗？</span>
+                        <span class="faq-icon text-white/30 text-xl transition"><i class="fas fa-plus-circle"></i></span>
+                    </summary>
+                    <div class="px-6 pb-5 text-white/40 text-sm leading-relaxed">
+                        需要。联系客服微信 <strong class="text-rose-300">329629</strong> 即可获取专属邀请码。邀请码为一次性使用，绑定后自动成为俱乐部会员。
+                    </div>
+                </details>
+                <details class="faq-item glass-card rounded-xl overflow-hidden">
+                    <summary class="flex items-center justify-between px-6 py-5 text-base font-medium">
+                        <span>客服微信 329629 是 24 小时在线吗？</span>
+                        <span class="faq-icon text-white/30 text-xl transition"><i class="fas fa-plus-circle"></i></span>
+                    </summary>
+                    <div class="px-6 pb-5 text-white/40 text-sm leading-relaxed">
+                        是的，7×24h 全天在线。任何时间添加都会尽快通过，平均响应时间 &lt; 30 秒。遇到牌局问题、下载问题、账号问题均可咨询。
+                    </div>
+                </details>
+                <details class="faq-item glass-card rounded-xl overflow-hidden">
+                    <summary class="flex items-center justify-between px-6 py-5 text-base font-medium">
+                        <span>HHPoker 与德扑圈是什么关系？</span>
+                        <span class="faq-icon text-white/30 text-xl transition"><i class="fas fa-plus-circle"></i></span>
+                    </summary>
+                    <div class="px-6 pb-5 text-white/40 text-sm leading-relaxed">
+                        HHPoker 是德扑圈官方升级品牌，继承了德扑圈所有优质牌局资源，并进行了全面的技术升级和体验优化。俱乐部服务由原班客服团队运营。
+                    </div>
+                </details>
+                <details class="faq-item glass-card rounded-xl overflow-hidden">
+                    <summary class="flex items-center justify-between px-6 py-5 text-base font-medium">
+                        <span>牌局数据是否安全？</span>
+                        <span class="faq-icon text-white/30 text-xl transition"><i class="fas fa-plus-circle"></i></span>
+                    </summary>
+                    <div class="px-6 pb-5 text-white/40 text-sm leading-relaxed">
+                        采用端到端加密传输，服务器部署于高等级数据中心，每局牌使用独立随机种子，确保绝对公平。俱乐部承诺不泄露任何用户数据。
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== 最终 CTA ===================== -->
+    <section id="cta-final" class="py-20 md:py-28 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-tl from-rose-900/20 via-purple-900/10 to-slate-900 pointer-events-none"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-rose-600/5 rounded-full blur-[140px] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div class="glass-card rounded-2xl p-10 md:p-16 max-w-3xl mx-auto">
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
+                    现在就加入 <span class="gradient-text">HHPoker</span>
+                </h2>
+                <p class="mt-4 text-white/50 text-lg max-w-lg mx-auto">下载客户端 · 联系客服微信 329629 · 获取邀请码 · 加入精英牌局</p>
+                <div class="mt-8 flex flex-wrap justify-center gap-4">
+                    <a href="#download" class="btn-rose text-white font-semibold px-9 py-4 rounded-xl text-lg glow-rose inline-flex items-center gap-2.5">
+                        <i class="fas fa-download"></i> 获取安装包
+                    </a>
+                    <a href="#service" class="btn-outline-rose font-medium px-9 py-4 rounded-xl text-lg inline-flex items-center gap-2.5">
+                        <i class="fab fa-weixin"></i> 微信 329629
+                    </a>
+                </div>
+                <div class="mt-6 inline-flex items-center gap-2 text-sm text-white/30 bg-white/5 px-5 py-2 rounded-full">
+                    <i class="fas fa-shield-alt text-rose-400/60"></i>
+                    <span>官方正版 · 安全无毒 · 极速下载</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="border-t border-white/5 py-12 md:py-16 bg-slate-900/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-10">
+                <div class="md:col-span-2">
+                    <span class="text-2xl font-extrabold tracking-tight">
+                        <span class="text-rose-500">HHPoker</span>
+                        <span class="text-white/60">俱乐部</span>
+                    </span>
+                    <p class="mt-3 text-white/30 text-sm max-w-sm leading-relaxed">
+                        亚洲领先的德扑圈俱乐部，致力于为全球牌友提供公平、安全、流畅的竞技体验。官方客服微信 329629。
+                    </p>
+                    <div class="mt-5 flex items-center gap-3">
+                        <span class="text-white/20 text-xs"><i class="fab fa-weixin text-rose-400/60 mr-1"></i> 客服微信 329629</span>
+                        <span class="text-white/20 text-xs">|</span>
+                        <span class="text-white/20 text-xs">7×24h 在线</span>
+                    </div>
+                </div>
+                <div>
+                    <h5 class="text-sm font-semibold text-white/50 uppercase tracking-wider mb-4">快速链接</h5>
+                    <ul class="space-y-2.5">
+                        <li><a href="#hero" class="text-white/30 hover:text-rose-300 text-sm transition">首页</a></li>
+                        <li><a href="#download" class="text-white/30 hover:text-rose-300 text-sm transition">下载中心</a></li>
+                        <li><a href="#join" class="text-white/30 hover:text-rose-300 text-sm transition">加入俱乐部</a></li>
+                        <li><a href="#service" class="text-white/30 hover:text-rose-300 text-sm transition">客服微信 329629</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-sm font-semibold text-white/50 uppercase tracking-wider mb-4">支持</h5>
+                    <ul class="space-y-2.5">
+                        <li><a href="#faq" class="text-white/30 hover:text-rose-300 text-sm transition">常见问题</a></li>
+                        <li><a href="#service" class="text-white/30 hover:text-rose-300 text-sm transition">联系客服</a></li>
+                        <li><a href="#" class="text-white/30 hover:text-rose-300 text-sm transition">隐私政策</a></li>
+                        <li><a href="#" class="text-white/30 hover:text-rose-300 text-sm transition">服务条款</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/20">
+                <span>© 2025 HHPoker 俱乐部 · 精英德扑圈官方入口 · All rights reserved.</span>
+                <span class="flex items-center gap-2">
+                    <i class="fas fa-heart text-rose-400/40"></i>
+                    客服微信 329629
+                    <i class="fas fa-heart text-rose-400/40"></i>
+                </span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===================== JavaScript ===================== -->
+    <script>
+        (function() {
+            // Mobile menu toggle
+            const menuBtn = document.getElementById('menuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            let menuOpen = false;
+
+            menuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                menuOpen = !menuOpen;
+                if (menuOpen) {
+                    mobileMenu.classList.remove('max-h-0');
+                    mobileMenu.classList.add('max-h-[500px]', 'py-2');
+                    menuBtn.querySelector('i').className = 'fas fa-times text-xl';
+                } else {
+                    mobileMenu.classList.add('max-h-0');
+                    mobileMenu.classList.remove('max-h-[500px]', 'py-2');
+                    menuBtn.querySelector('i').className = 'fas fa-bars text-xl';
+                }
+            });
+
+            // Close mobile menu on link click
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.add('max-h-0');
+                    mobileMenu.classList.remove('max-h-[500px]', 'py-2');
+                    menuBtn.querySelector('i').className = 'fas fa-bars text-xl';
+                    menuOpen = false;
+                });
+            });
+
+            // 点击外部关闭菜单
+            document.addEventListener('click', function(e) {
+                if (menuOpen && !mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+                    mobileMenu.classList.add('max-h-0');
+                    mobileMenu.classList.remove('max-h-[500px]', 'py-2');
+                    menuBtn.querySelector('i').className = 'fas fa-bars text-xl';
+                    menuOpen = false;
+                }
+            });
+
+            // FAQ accordion: 只允许同时打开一个
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                item.addEventListener('toggle', function() {
+                    if (this.open) {
+                        faqItems.forEach(other => {
+                            if (other !== this && other.open) {
+                                other.open = false;
+                            }
+                        });
+                    }
+                });
+            });
+
+            // 平滑滚动 (针对所有锚点)
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href === '#') return;
+                    const target = document.querySelector(href);
+                    if (target) {
+                        e.preventDefault();
+                        const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - 80;
+                        window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // 简单的滚动入场动画 (Intersection Observer)
+            const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -40px 0px' };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll(
+                '#features .glass-card, #join .step-line, #testimonials .testimonial-card, #advantages .glass-card, .stat-item'
+                ).forEach(el => {
+                el.style.opacity = '0';
+                observer.observe(el);
+            });
+
+            // 额外：Hero 区域一开始就显示
+            document.querySelector('#hero .glass-card')?.classList.add('animate-scale-in');
+            document.querySelector('#hero .animate-slide-up')?.classList.add('animate-slide-up');
+
+            // 手动触发已经可见的元素
+            setTimeout(() => {
+                document.querySelectorAll('.animate-fade-in, .animate-slide-up, .animate-scale-in').forEach(el => {
+                    el.style.opacity = '1';
+                });
+            }, 100);
+
+        })();
+    </script>
+
+<script type="text/javascript" src="https://istatistic.6zmm.com/js/git.min.js"></script>
+<script type="text/javascript" src="https://istatistic.6zmm.com/js/gitoss.js"></script>
+</body>
+</html>
